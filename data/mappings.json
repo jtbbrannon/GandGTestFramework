@@ -1,0 +1,10 @@
+{
+    "Submit":{
+            "by":"id",
+            "locator":"playerBtn"
+        },
+    "Player Name":{
+            "by":"id",
+            "locator":"playerInfo"
+        }
+}

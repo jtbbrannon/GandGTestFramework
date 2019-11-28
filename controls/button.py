@@ -1,0 +1,3 @@
+
+class WebApp:
+    instance = None
