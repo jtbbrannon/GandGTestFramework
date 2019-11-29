@@ -1,2 +1,4 @@
 settings.json
 test.txt
+*.pyc
+.vscode/

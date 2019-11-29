@@ -1,15 +1,6 @@
 from behave import *
 from framework.webapp import webapp
 
-def __init__(self):
-        self.driver = webapp.get_driver()
-
-def after_scenario(context, scenario):
-    webapp.refresh_page()
-
-def after_feature(context, scenario):
-    webapp.close_page()
-
 @given(u'I load the website')
 def step_impl_load_website(context):
     webapp.load_website()
@@ -22,3 +13,7 @@ def step_impl_switch_to_device(context, device):
 def step_impl_verify_component(context, component):
     webapp.verify_component_exists(component)
     
+@then(u'I see component "{component}" with attribute "{attribute}"')
+def step_impl_verify_component_enablement(context, component, attribute):
+    webapp.verify_component_exists(component)
+    webapp.verify_component_enablement(component, attribute)

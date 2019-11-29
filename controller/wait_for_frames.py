@@ -4,7 +4,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from data.config import settings
-from urllib.parse import urljoin
 
 class wait_for_frames(object):
 
