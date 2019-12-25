@@ -1,10 +1,12 @@
 {
     "Submit":{
             "by":"id",
-            "locator":"playerBtn"
+            "locator":"playerBtn",
+            "type":"Button"
         },
     "Player Name":{
             "by":"id",
-            "locator":"playerInfo"
+            "locator":"playerInfo",
+            "type":"TextBox"
         }
 }

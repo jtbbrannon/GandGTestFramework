@@ -8,7 +8,9 @@ from data.config import mappings
 from controller.wait_for_frames import wait_for_frames
 from webdriver import dr
 from controls.button import Button
-
+from controls.textbox import TextBox
+from controls.type import ComType
+import time
 
 class WebApp:
     instance = None
@@ -44,7 +46,9 @@ class WebApp:
         unNextBtn.click()
         pw = dr.find_element_by_xpath("//*[@id='password']//input")
         pw.send_keys(settings['Password'])
-        pwNextBtn = dr.find_element_by_id("passwordNext")
+        wait = WebDriverWait(dr, 10)
+        pwNextBtn =wait.until(EC.element_to_be_clickable((By.ID, "passwordNext")))
+        time.sleep(1)
         dr.execute_script("arguments[0].click();", pwNextBtn)
 
 
@@ -58,20 +62,17 @@ class WebApp:
         
 
     def verify_component_exists(self, component):
-        # Simple implementation
-        comMap = mappings[component]
-        button = Button(comMap["locator"])
+        button = ComType(component).getObject()
         wait = WebDriverWait(dr, 10)
-        element = wait.until(EC.presence_of_element_located((By.ID, button.locator)))
-        value = element.get_attribute("value")
+        wait.until(EC.presence_of_element_located((By.ID, button.locator)))
+        value = button.get_value()
         assert component in value, \
             "Component {} not found on page".format(component)
 
     def verify_component_enablement(self, component, attribute):
-        comMap = mappings[component]
-        button = Button(comMap["locator"])
-        if attribute is "enabled":
-            assert True in button.enabled, \
+        button = ComType(component).getObject()
+        if attribute in "enabled":
+            assert str(True) in str(button.enabled), \
                 "Component {} is disabled".format(component)
         else:
             assert str(False) in str(button.enabled), \
